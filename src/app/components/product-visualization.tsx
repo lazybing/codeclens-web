@@ -21,33 +21,23 @@ export function ProductVisualization() {
 
   return (
     <div className="w-full overflow-hidden rounded-lg border border-border bg-surface">
-      {/* Title bar */}
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            <span className="size-2.5 rounded-full bg-zinc-700" />
-            <span className="size-2.5 rounded-full bg-zinc-700" />
-            <span className="size-2.5 rounded-full bg-zinc-700" />
-          </div>
-          <span className="font-mono text-xs text-muted">
-            sample_hevc_1080p.mp4
-          </span>
-        </div>
-        <span className="font-mono text-xs text-muted">Analysis complete</span>
+        <span className="font-mono text-xs text-muted">
+          sample_hevc_1080p.mp4
+        </span>
+        <span className="text-xs text-muted">Analysis complete</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px]">
-        {/* Main chart area */}
         <div className="border-b border-border p-4 lg:border-b-0 lg:border-r">
-          {/* Metric tabs */}
           <div className="mb-4 flex gap-1">
             {["Bitrate", "QP", "VMAF", "Frame type"].map((tab, i) => (
               <span
                 key={tab}
                 className={`rounded px-2.5 py-1 font-mono text-xs ${
                   i === 0
-                    ? "bg-zinc-800 text-foreground"
-                    : "text-muted hover:text-foreground"
+                    ? "bg-surface text-foreground ring-1 ring-border"
+                    : "text-muted"
                 }`}
               >
                 {tab}
@@ -55,10 +45,9 @@ export function ProductVisualization() {
             ))}
           </div>
 
-          {/* Bitrate timeline */}
           <div className="relative">
             <div className="mb-2 flex items-baseline justify-between">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-muted">
+              <span className="font-mono text-[11px] text-muted">
                 Bitrate (kbps)
               </span>
               <span className="font-mono text-[11px] text-muted">0 — 8,000</span>
@@ -78,25 +67,23 @@ export function ProductVisualization() {
                   >
                     <div
                       className={`absolute bottom-0 w-full ${
-                        isDropZone ? "bg-red-900/60" : "bg-zinc-700"
-                      } ${isCurrent ? "ring-1 ring-white/40" : ""}`}
+                        isDropZone ? "bg-accent/40" : "bg-muted/30"
+                      } ${isCurrent ? "ring-1 ring-accent/60" : ""}`}
                       style={{ height: `${height}%` }}
                     />
                   </div>
                 );
               })}
 
-              {/* Drop annotation */}
               <div
                 className="absolute bottom-0 flex flex-col items-center"
                 style={{ left: "14%", width: "8%" }}
               >
-                <div className="mb-1 w-px flex-1 border-l border-dashed border-red-800/80" />
+                <div className="mb-1 w-px flex-1 border-l border-dashed border-accent/50" />
               </div>
             </div>
 
-            {/* Frame ruler */}
-            <div className="mt-2 flex justify-between font-mono text-[10px] text-zinc-600">
+            <div className="mt-2 flex justify-between font-mono text-[10px] text-muted/50">
               <span>0</span>
               <span>225</span>
               <span>450</span>
@@ -104,19 +91,15 @@ export function ProductVisualization() {
               <span>900</span>
             </div>
 
-            {/* Playhead marker */}
             <div
-              className="pointer-events-none absolute top-8 bottom-6 w-px bg-white/30"
+              className="pointer-events-none absolute top-8 bottom-6 w-px bg-accent/40"
               style={{ left: `${(438 / 900) * 100}%` }}
             />
           </div>
         </div>
 
-        {/* Inspector panel */}
         <div className="p-4">
-          <p className="mb-4 font-mono text-[11px] uppercase tracking-wider text-muted">
-            Frame inspector
-          </p>
+          <p className="mb-4 text-xs text-muted">Frame inspector</p>
 
           <div className="space-y-3">
             <MetricRow label="Frame" value="438" />
@@ -126,9 +109,7 @@ export function ProductVisualization() {
           </div>
 
           <div className="mt-6 border-t border-border pt-4">
-            <p className="mb-3 font-mono text-[11px] uppercase tracking-wider text-muted">
-              Detected issues
-            </p>
+            <p className="mb-3 text-xs text-muted">Detected issues</p>
             <div className="space-y-2">
               <IssueTag label="Bitrate drop" severity="warning" />
               <IssueTag
@@ -138,16 +119,13 @@ export function ProductVisualization() {
             </div>
           </div>
 
-          {/* Mini QP sparkline */}
           <div className="mt-6 border-t border-border pt-4">
-            <p className="mb-2 font-mono text-[11px] uppercase tracking-wider text-muted">
-              QP trend
-            </p>
+            <p className="mb-2 text-xs text-muted">QP trend</p>
             <div className="flex h-8 items-end gap-px">
               {QP_VALUES.slice(30, 70).map((qp, i) => (
                 <div
                   key={i}
-                  className={`flex-1 ${qp >= 38 ? "bg-red-900/50" : "bg-zinc-700"}`}
+                  className={`flex-1 ${qp >= 38 ? "bg-accent/50" : "bg-muted/25"}`}
                   style={{ height: `${((qp - 20) / 25) * 100}%` }}
                 />
               ))}
@@ -156,7 +134,6 @@ export function ProductVisualization() {
         </div>
       </div>
 
-      {/* Status bar */}
       <div className="flex items-center justify-between border-t border-border px-4 py-2 font-mono text-[11px] text-muted">
         <span>Frames analyzed: 900</span>
         <span>Issues found: 2</span>
@@ -177,9 +154,9 @@ function MetricRow({
 }) {
   const valueColor =
     highlight === "critical"
-      ? "text-red-400"
+      ? "text-accent"
       : highlight === "warning"
-        ? "text-amber-400"
+        ? "text-muted"
         : "text-foreground";
 
   return (
@@ -201,8 +178,8 @@ function IssueTag({
 }) {
   const colors =
     severity === "critical"
-      ? "border-red-900/60 bg-red-950/40 text-red-400"
-      : "border-amber-900/60 bg-amber-950/40 text-amber-400";
+      ? "border-accent/30 text-accent"
+      : "border-border text-muted";
 
   return (
     <div

@@ -18,7 +18,11 @@ export const metadata: Metadata = {
     "Analyze H.264, HEVC and AV1 bitstreams. Find quality issues and understand why they happen.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="en"
