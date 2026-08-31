@@ -7,7 +7,7 @@ export default function Home() {
     <PageShell>
       <section className="mx-auto max-w-6xl px-6 pb-16 pt-24 md:pt-32">
         <h1 className="max-w-2xl text-4xl font-medium tracking-tight text-foreground md:text-5xl md:leading-[1.15]">
-          See what your codec is really doing.
+          AI-Powered Video Codec Analyzer.
         </h1>
         <p className="mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
           Analyze H.264, HEVC and AV1 bitstreams.

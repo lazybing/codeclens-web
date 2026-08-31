@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CodecLens — See what your codec is really doing",
+  title: "CodecLens — AI-Powered Video Codec Analyzer",
   description:
     "Analyze H.264, HEVC and AV1 bitstreams. Find quality issues and understand why they happen.",
 };
